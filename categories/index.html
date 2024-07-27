@@ -474,108 +474,108 @@
 	    },300);
 	}
 	
-	// 显示悬停播放位置弹层
-	function showHover(e){
-	    // 计算鼠标在进度条上的悬停位置(当前鼠标的X坐标-进度条在窗口中的left位置)
-	    progress_t=e.clientX - progress_box.getBoundingClientRect().left;
-	    // 计算鼠标在进度条上悬停时的音频位置
-	    // audio.duration 音频总时长
-	    progress_loc=audio.duration * (progress_t / progress_box.getBoundingClientRect().width);
-	    // 设置悬停进度条的宽度(较深部分)
-	    hover_bar.style.width=progress_t+'px';
-	    // 将悬停音频位置转为分钟
-	    c_m=progress_loc / 60;
-	    ct_minutes=Math.floor(c_m); //分
-	    ct_seconds=Math.floor(progress_loc - ct_minutes * 60); //秒
-	
-	    if(ct_minutes<10){
-	        ct_minutes='0'+ct_minutes;
-	    }
-	    if(ct_seconds<10){
-	        ct_seconds='0'+ct_seconds;
-	    }
-	    if(isNaN(ct_minutes) || isNaN(ct_seconds)){
-	        hover_time.innerText='--:--';
-	    }else{
-	        hover_time.innerText=ct_minutes+':'+ct_seconds;
-	    }
-	
-	    // 设置悬停播放位置弹层的位置并显示
-	    hover_time.style.left=progress_t+'px';
-	    hover_time.style.marginLeft='-20px';
-	    hover_time.style.display='block';
-	}
-	
-	// 隐藏悬停播放位置弹层
-	function hideHover(){
-	    hover_bar.style.width='0px';
-	    hover_time.innerText='00:00';
-	    hover_time.style.left='0px';
-	    hover_time.style.marginLeft='0px';
-	    hover_time.style.display='none';
-	}
-	
-	// 从点击的位置开始播放
-	function playFromClickedPos(){
-	    // 设置当前播放时间
-	    audio.currentTime=progress_loc;
-	    // 设置进度条宽度
-	    progress_bar.style.width=progress_t+'px';
-	    // 隐藏悬停播放位置弹层
-	    hideHover();
-	}
-	
-	// 改变当前播放时间
-	function updateCurTime(){
-	    // 当前播放时间(分)
-	    cur_minutes=Math.floor(audio.currentTime / 60);
-	    // 当前播放时间(秒)
-	    cur_seconds=Math.floor(audio.currentTime - cur_minutes * 60);
-	    // 音频总时长(分)
-	    dur_minutes=Math.floor(audio.duration / 60);
-	    // 音频总时长(秒)
-	    dur_seconds=Math.floor(audio.duration - dur_minutes * 60);
-	    // 计算播放进度
-	    play_progress=audio.currentTime / audio.duration * 100;
-	
-	    if(cur_minutes<10){
-	        cur_minutes='0'+cur_minutes;
-	    }
-	    if(cur_seconds<10){
-	        cur_seconds='0'+cur_seconds;
-	    }
-	    if(dur_minutes<10){
-	        dur_minutes='0'+dur_minutes;
-	    }
-	    if(dur_seconds<10){
-	        dur_seconds='0'+dur_seconds;
-	    }
-	
-	    // 设置播放时间
-	    if(isNaN(cur_minutes) || isNaN(cur_seconds)){
-	        current_time.innerText='00:00';
-	    }else{
-	        current_time.innerText=cur_minutes+':'+cur_seconds;
-	    }
-	    // 设置总时长
-	    if(isNaN(dur_minutes) || isNaN(dur_seconds)){
-	        total_time.innerText='00:00';
-	    }else{
-	        total_time.innerText=dur_minutes+':'+dur_seconds;
-	    }
-	    // 设置进度条宽度
-	    progress_bar.style.width=play_progress+'%';
-	
-	    // 播放完毕, 恢复样式
-	    if(play_progress==100){
-	        play_pause.querySelector('.fa').classList='fa fa-play';
-	        progress_bar.style.width='0px';
-	        current_time.innerText='00:00';
-	        player_track.classList.remove('active');
-	        album_cover.classList.remove('active');
-	    }
-	}
-	
+// 显示悬停播放位置弹层
+function showHover(e){
+    // 计算鼠标在进度条上的悬停位置(当前鼠标的X坐标-进度条在窗口中的left位置)
+    progress_t=e.clientX - progress_box.getBoundingClientRect().left;
+    // 计算鼠标在进度条上悬停时的音频位置
+    // audio.duration 音频总时长
+    progress_loc=audio.duration * (progress_t / progress_box.getBoundingClientRect().width);
+    // 设置悬停进度条的宽度(较深部分)
+    hover_bar.style.width=progress_t+'px';
+    // 将悬停音频位置转为分钟
+    c_m=progress_loc / 60;
+    ct_minutes=Math.floor(c_m); //分
+    ct_seconds=Math.floor(progress_loc - ct_minutes * 60); //秒
+
+    if(ct_minutes<10){
+        ct_minutes='0'+ct_minutes;
+    }
+    if(ct_seconds<10){
+        ct_seconds='0'+ct_seconds;
+    }
+    if(isNaN(ct_minutes) || isNaN(ct_seconds)){
+        hover_time.innerText='--:--';
+    }else{
+        hover_time.innerText=ct_minutes+':'+ct_seconds;
+    }
+
+    // 设置悬停播放位置弹层的位置并显示
+    hover_time.style.left=progress_t+'px';
+    hover_time.style.marginLeft='-20px';
+    hover_time.style.display='block';
+}
+
+// 隐藏悬停播放位置弹层
+function hideHover(){
+    hover_bar.style.width='0px';
+    hover_time.innerText='00:00';
+    hover_time.style.left='0px';
+    hover_time.style.marginLeft='0px';
+    hover_time.style.display='none';
+}
+
+// 从点击的位置开始播放
+function playFromClickedPos(){
+    // 设置当前播放时间
+    audio.currentTime=progress_loc;
+    // 设置进度条宽度
+    progress_bar.style.width=progress_t+'px';
+    // 隐藏悬停播放位置弹层
+    hideHover();
+}
+
+// 改变当前播放时间
+function updateCurTime(){
+    // 当前播放时间(分)
+    cur_minutes=Math.floor(audio.currentTime / 60);
+    // 当前播放时间(秒)
+    cur_seconds=Math.floor(audio.currentTime - cur_minutes * 60);
+    // 音频总时长(分)
+    dur_minutes=Math.floor(audio.duration / 60);
+    // 音频总时长(秒)
+    dur_seconds=Math.floor(audio.duration - dur_minutes * 60);
+    // 计算播放进度
+    play_progress=audio.currentTime / audio.duration * 100;
+
+    if(cur_minutes<10){
+        cur_minutes='0'+cur_minutes;
+    }
+    if(cur_seconds<10){
+        cur_seconds='0'+cur_seconds;
+    }
+    if(dur_minutes<10){
+        dur_minutes='0'+dur_minutes;
+    }
+    if(dur_seconds<10){
+        dur_seconds='0'+dur_seconds;
+    }
+
+    // 设置播放时间
+    if(isNaN(cur_minutes) || isNaN(cur_seconds)){
+        current_time.innerText='00:00';
+    }else{
+        current_time.innerText=cur_minutes+':'+cur_seconds;
+    }
+    // 设置总时长
+    if(isNaN(dur_minutes) || isNaN(dur_seconds)){
+        total_time.innerText='00:00';
+    }else{
+        total_time.innerText=dur_minutes+':'+dur_seconds;
+    }
+    // 设置进度条宽度
+    progress_bar.style.width=play_progress+'%';
+
+    // 播放完毕, 恢复样式
+    if(play_progress==100){
+        play_pause.querySelector('.fa').classList='fa fa-play';
+        progress_bar.style.width='0px';
+        current_time.innerText='00:00';
+        player_track.classList.remove('active');
+        album_cover.classList.remove('active');
+    }
+}
+
 	// 切换歌曲(flag: 0=初始, 1=下一首, -1=上一首)
 	function selectTrack(flag){
 	    if(flag==0 || flag==1){
@@ -632,10 +632,10 @@
 </script>
 <style scoped>
     .music {
-    margin-top: 27%;
-    margin-left:-15%;
-    margin-bottom: -30%;
-    transform: scale(0.7); /* 将大小缩小为原来的 50% */
+    margin-top: 30%;
+    margin-left:-16%;
+    padding: -30%;
+    transform: scale(0.72); /* 将大小缩小为原来的 50% */
     transform-origin: top left; /* 设置缩放的原点为组件的左上角 */
     }
 	*{
@@ -759,7 +759,7 @@
 	    background-color: #fff;
 	    border-radius: 15px;
 	    z-index: 2;
-	    box-shadow: 0 30px 80px #656565;
+	    box-shadow: 0 3px 3px #656565;
 	}
 	/* 封面 */
 	.music .album-cover{
